@@ -15,6 +15,7 @@ import org.apache.commons.lang.ArrayUtils;
  *
  */
 public class App {
+	
 	public static long[] packaging;
 	public static Set<Long> production ;
 //	public static Map<Long, Integer> mainMap;
@@ -27,14 +28,16 @@ public class App {
 	
 
 	public static void main(String[] args) {
-		production = new HashSet<>(Arrays.asList(arr));
-		packaging = new long[]{12354,12346,12345,12345,12346,12346,12349,12349,12349};
+//		production = new HashSet<>(Arrays.asList(arr));
+//		packaging = new long[]{12354,12346,12345,12345,12346,12346,12349,12349,12349};
+//		
+//		
+//		System.out.println("Orignal data");
+//		print(production,packaging);
+//		
+//		process(production, packaging);
+		DataLoader.getData();
 		
-		
-		System.out.println("Orignal data");
-		print(production,packaging);
-		
-		process(production, packaging);
 
 	}
 
