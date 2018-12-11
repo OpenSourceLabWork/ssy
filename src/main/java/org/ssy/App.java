@@ -1,14 +1,11 @@
 package org.ssy;
 
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-
-import org.apache.commons.lang.ArrayUtils;
 
 /**
  * Hello world!
@@ -16,67 +13,64 @@ import org.apache.commons.lang.ArrayUtils;
  */
 public class App {
 	
-	public static long[] packaging;
-	public static Set<Long> production ;
+	public static List<String> packaging;
+	public static List<String> production ;
 //	public static Map<Long, Integer> mainMap;
 	public static Long arr[] = {12345l, 12346l, 12347l, 12348l, 12349l};
 
 	public App() {
 		
-		Collections.addAll(production, arr);
+//		Collections.addAll(production, arr);
 	}
 	
 
 	public static void main(String[] args) {
 //		production = new HashSet<>(Arrays.asList(arr));
 //		packaging = new long[]{12354,12346,12345,12345,12346,12346,12349,12349,12349};
-//		
-//		
 //		System.out.println("Orignal data");
-//		print(production,packaging);
-//		
-//		process(production, packaging);
-		DataLoader.getData();
+		
+		 production = DataLoader.loadXmlData("production.xml");
+		 packaging = DataLoader.loadXmlData("packaging.xml");
+		
+		process(production, packaging);
+		
 		
 
 	}
 
-	public static void process(Set<Long> p_production, long[] p_packaging) {
+	public static void process(List<String> p_production, List<String> p_packaging) {
 		
-		Map<Long, Integer> mainMap = new HashMap<Long, Integer>();
-		Set<Long> outset = new HashSet<>();
+		Map<String, Integer> mainMap = new HashMap<String, Integer>();
+//		Set<Long> outset = new HashSet<>();
 		
-		for (long p_key : p_production) {
+		for (String p_key : p_production) {
 			int ntimes = 0;
-			for (long p_value : p_packaging) {
+			for (String p_value : new ArrayList<>(p_packaging)) {
 //				System.out.println(p_key+" VS "+p_value);
-				if (p_key == p_value) {
+				if (p_key.trim().equals(p_value.trim())) {
 					ntimes++;
-					p_packaging = ArrayUtils.removeElement(p_packaging, p_value);
+					p_packaging.remove(p_value);
 				}
 //				System.out.println(p_key+" matched "+ntimes);
 			}
 //			System.out.println(p_key+" :: "+ntimes);
 			mainMap.put(p_key, ntimes);
-			
 		}
-		
 		print(p_packaging,mainMap);
 	}
 	
-	public static void print(long[] p_packaing, Map<Long, Integer> mainMap2)
+	public static void print(List<String> p_packaing, Map<String, Integer> mainMap2)
 	{
 		
-		
 		System.out.println("Counter Feeds in Packaging");
-		for(long val : p_packaing)
+		for(String val : p_packaing)
 		{
 			System.out.print(val+", ");
 		}
 		System.out.println("\n\n");
 		
 		System.out.println("Matched Items");
-		for(Entry<Long,Integer> pair : mainMap2.entrySet())
+		for(Entry<String,Integer> pair : mainMap2.entrySet())
 		{
 			System.out.println(pair.getKey()+" : "+pair.getValue());
 		}
