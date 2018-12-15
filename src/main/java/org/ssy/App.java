@@ -87,7 +87,7 @@ public class App {
 	public static void print(List<String> p_packaging, Map<String, Integer> mainMap2) {
 		System.out.println("Number of Counter Feeds in Packaging : " + p_packaging.size());
 
-		System.out.println("Counter Feeds in Packaging");
+		System.out.println("Counter Feeds are : ");
 		for (String val : p_packaging) {
 			System.out.print(val + ", ");
 		}
