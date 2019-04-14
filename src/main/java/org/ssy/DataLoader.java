@@ -50,6 +50,20 @@ public class DataLoader {
 		}
 		return nodes;
 	}
+	
+	public static List<String> loadXmlDataTest(String filename) {
+
+		List<String> nodes = null;
+		try {
+			Document document = getDocument(filename);
+			String xpathExpression = "//Event//@Event_Occured_At";
+		// System.out.println( evaluateXPath(document, xpathExpression) );
+			nodes = evaluateXPath(document, xpathExpression);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return nodes;
+	}
 
 	private static List<String> evaluateXPath(Document document, String xpathExpression) throws Exception {
 		// Create XPathFactory object
